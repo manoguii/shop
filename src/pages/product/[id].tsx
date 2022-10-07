@@ -14,15 +14,6 @@ interface ProductsProps {
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      {params: {id: 'prod_MZB3mDjifA9zoi'}}
-    ],
-    fallback: false,
-  }
-}
-
 export default function Product({ product }: ProductsProps) {
   return (
     <ProductContainer>
@@ -42,6 +33,15 @@ export default function Product({ product }: ProductsProps) {
       </ProductDetail>
     </ProductContainer>
     )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      {params: {id: 'prod_MZB3mDjifA9zoi'}}
+    ],
+    fallback: 'blocking',
+  }
 }
 
 
