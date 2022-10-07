@@ -1,20 +1,40 @@
-import { useRouter } from "next/router"
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
+import Image from "next/future/image"
+import Stripe from "stripe"
+import { stripe } from "../../lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetail } from "../../styles/pages/products"
 
-export default function Product() {
+interface ProductsProps {
+  product: {
+    id: string; 
+    name: string;
+    imageUrl: string;
+    price: string;
+    description: string;
+  }
+}
 
-  const { query } = useRouter()
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      {params: {id: 'prod_MZB3mDjifA9zoi'}}
+    ],
+    fallback: false,
+  }
+}
+
+export default function Product({ product }: ProductsProps) {
   return (
     <ProductContainer>
       <ImageContainer>
-
+        <Image src={product.imageUrl} width={520} height={480} alt=""/>
       </ImageContainer>
 
       <ProductDetail>
-        <h1>camisetas X</h1>
-        <span>R$ 79,80</span>
+        <h1>{ product.name }</h1>
+        <span>{ product.price }</span>
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum vel reiciendis iure quam, quaerat et expedita, quasi ab veritatis aliquam unde inventore explicabo temporibus illo eum dolores rem modi nobis?</p>
+        <p>{ product.description }</p>
         
         <button>
           Comprar agora
@@ -22,4 +42,32 @@ export default function Product() {
       </ProductDetail>
     </ProductContainer>
     )
+}
+
+
+export const getStaticProps: GetStaticProps<any, {id: string}> = async ({ params }) => {
+  const productId = params.id;
+
+  const product = await stripe.products.retrieve(productId, {
+    expand: ['default_price'],
+  })
+
+  const price = product.default_price as Stripe.Price
+
+
+  return {
+    props: {
+      product: {
+        id: product.id,
+        name: product.name,
+        imageUrl: product.images[0],
+        price: new Intl.NumberFormat('pt-br', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(price.unit_amount / 100),
+        description: product.description,        
+      }
+    },
+    revalidate: 60 * 60 * 1,
+  }
 }
