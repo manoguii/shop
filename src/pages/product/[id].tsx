@@ -3,6 +3,9 @@ import Image from "next/future/image"
 import Stripe from "stripe"
 import { stripe } from "../../lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetail } from "../../styles/pages/products"
+import axios from "axios";
+import { useState } from "react"
+
 
 interface ProductsProps {
   product: {
@@ -16,8 +19,24 @@ interface ProductsProps {
 }
 
 export default function Product({ product }: ProductsProps) {
-  function handleBayProduct() {
-    console.log(product.defaultPriceId)
+  const [isCreateCheckoutSession ,setIsCreateCheckoutSession] = useState(false)
+
+  async function handleBayProduct() {
+    try {
+      setIsCreateCheckoutSession(true)
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId,
+      })
+
+      const {checkoutUrl} = response.data
+      
+      window.location.href = checkoutUrl
+    }catch(err) {
+
+      setIsCreateCheckoutSession(false)
+
+      alert("Falha ao redirecionar ao checkout")
+    }
   }
   return (
     <ProductContainer>
@@ -31,7 +50,7 @@ export default function Product({ product }: ProductsProps) {
 
         <p>{ product.description }</p>
         
-        <button onClick={handleBayProduct}>
+        <button disabled={isCreateCheckoutSession} onClick={handleBayProduct}>
           Comprar agora
         </button>
       </ProductDetail>
