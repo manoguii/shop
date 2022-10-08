@@ -11,10 +11,14 @@ interface ProductsProps {
     imageUrl: string;
     price: string;
     description: string;
+    defaultPriceId: string
   }
 }
 
 export default function Product({ product }: ProductsProps) {
+  function handleBayProduct() {
+    console.log(product.defaultPriceId)
+  }
   return (
     <ProductContainer>
       <ImageContainer>
@@ -27,7 +31,7 @@ export default function Product({ product }: ProductsProps) {
 
         <p>{ product.description }</p>
         
-        <button>
+        <button onClick={handleBayProduct}>
           Comprar agora
         </button>
       </ProductDetail>
@@ -65,7 +69,8 @@ export const getStaticProps: GetStaticProps<any, {id: string}> = async ({ params
           style: 'currency',
           currency: 'BRL',
         }).format(price.unit_amount / 100),
-        description: product.description,        
+        description: product.description,
+        defaultPriceId: price.id,        
       }
     },
     revalidate: 60 * 60 * 1,
