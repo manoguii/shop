@@ -1,4 +1,4 @@
-import { globalCss } from ".";
+import { globalCss } from '.'
 
 export const globalStyles = globalCss({
   '*': {
@@ -15,6 +15,5 @@ export const globalStyles = globalCss({
   'body, input, button, textarea': {
     fontFamily: 'Roboto',
     fontWeight: '400',
-
   },
 })

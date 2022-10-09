@@ -1,4 +1,4 @@
-import { styled } from "..";
+import { styled } from '..'
 
 export const HomeContainer = styled('main', {
   display: 'flex',
@@ -20,7 +20,7 @@ export const Product = styled('a', {
   overflow: 'hidden',
 
   img: {
-    objectFit: 'cover'
+    objectFit: 'cover',
   },
 
   footer: {
@@ -61,13 +61,13 @@ export const Product = styled('a', {
 
     strong: {
       fontSize: '$lg',
-      color: '$gray100'
+      color: '$gray100',
     },
 
     span: {
       fontSize: '$xl',
       fontWeight: 'bold',
-      color: '$green300'
+      color: '$green300',
     },
   },
 

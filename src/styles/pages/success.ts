@@ -1,6 +1,6 @@
-import { styled } from "..";
+import { styled } from '..'
 
-export const SuccessContainer = styled('main',{
+export const SuccessContainer = styled('main', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -31,13 +31,12 @@ export const SuccessContainer = styled('main',{
     fontWeight: 'bold',
 
     '&:hover': {
-      color: '$green300'
+      color: '$green300',
     },
   },
 })
 
-
-export const ImageContainer = styled('div',{
+export const ImageContainer = styled('div', {
   width: '100%',
   maxWidth: 130,
   height: 145,
@@ -45,12 +44,12 @@ export const ImageContainer = styled('div',{
   borderRadius: 8,
   padding: '0.25rem',
   marginTop: '4rem',
-  
+
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 
   img: {
     objectFit: 'cover',
-  }
+  },
 })

@@ -1,4 +1,4 @@
-import { styled } from "../../styles";
+import { styled } from '../../styles'
 
 export const HeaderContainer = styled('header', {
   padding: '2rem 0',
@@ -18,6 +18,6 @@ export const HeaderContainer = styled('header', {
     borderRadius: 6,
     width: '48px',
     height: '48px',
-    border: 'none'
+    border: 'none',
   },
 })
