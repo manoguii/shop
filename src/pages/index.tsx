@@ -28,7 +28,7 @@ export default function Home({ products }: HomeProps) {
   return (
     <>
       <Head>
-        <title>Shop</title>
+        <title>Home | Shop</title>
       </Head>
 
       <HomeContainer ref={sliderRef} className="keen-slider">
