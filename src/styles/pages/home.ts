@@ -36,10 +36,28 @@ export const Product = styled('a', {
     alignItems: 'center',
     justifyContent: 'space-between',
 
-    backgroundColor: 'rgba(0, 0, 0,  0.6)',
+    backgroundColor: '$gray800',
     transform: 'translateY(110%)',
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
+
+    div: {
+      display: 'flex',
+      gap: 4,
+      flexDirection: 'column',
+    },
+
+    button: {
+      width: '56px',
+      height: '56px',
+      backgroundColor: '$green500',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 6,
+      border: 'none',
+      cursor: 'pointer',
+    },
 
     strong: {
       fontSize: '$lg',
@@ -56,7 +74,7 @@ export const Product = styled('a', {
   '&:hover': {
     footer: {
       transform: 'translate(0%)',
-      opacity: 1,
+      opacity: 0.9,
     },
   },
 })
