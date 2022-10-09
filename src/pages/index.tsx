@@ -1,17 +1,13 @@
 import Image from "next/future/image";
 import { HomeContainer, Product } from "../styles/pages/home";
-
 import { useKeenSlider } from 'keen-slider/react'
-
-import camisa1 from "../assets/camisetas/1.png"
-import camisa2 from "../assets/camisetas/2.png"
-import camisa3 from "../assets/camisetas/3.png"
-
 import 'keen-slider/keen-slider.min.css'
 import { stripe } from "../lib/stripe";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import Stripe from "stripe";
 import Link from "next/link";
+import Head from "next/head";
+
 
 interface HomeProps {
   products: {
@@ -30,7 +26,12 @@ export default function Home({ products }: HomeProps) {
     }
   })
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
+    <>
+      <Head>
+        <title>Shop</title>
+      </Head>
+
+      <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map(product => {
         return (
           <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
@@ -46,6 +47,7 @@ export default function Home({ products }: HomeProps) {
         )
       })}      
     </HomeContainer>
+    </>
   )
 }
 
