@@ -19,5 +19,6 @@ export const HeaderContainer = styled('header', {
     width: '48px',
     height: '48px',
     border: 'none',
+    cursor: 'pointer',
   },
 })
