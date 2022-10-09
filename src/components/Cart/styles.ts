@@ -9,3 +9,9 @@ export const Content = styled(Dialog.Content, {
   width: '30rem',
   background: '$gray800',
 })
+
+export const Close = styled(Dialog.Close, {})
+
+export const Overlay = styled(Dialog.Overlay, {})
+
+export const Title = styled(Dialog.Title, {})

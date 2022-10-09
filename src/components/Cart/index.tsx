@@ -1,16 +1,16 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
-import { Content } from './styles'
+import { Close, Content, Overlay, Title } from './styles'
 
 export default function Cart() {
   return (
     <Dialog.Portal>
-      <Dialog.Overlay />
+      <Overlay />
       <Content>
-        <Dialog.Close>
+        <Close>
           <X size={24} weight="bold" />
-        </Dialog.Close>
-        <Dialog.Title>Sacola de compras</Dialog.Title>
+        </Close>
+        <Title>Sacola de compras</Title>
         <form action="">
           <input type="text" />
         </form>
