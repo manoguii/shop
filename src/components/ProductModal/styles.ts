@@ -37,6 +37,7 @@ export const ProductModalContainer = styled('div', {
       border: 'none',
       display: 'flex',
       fontSize: '1rem',
+      cursor: 'pointer',
     },
   },
 })
