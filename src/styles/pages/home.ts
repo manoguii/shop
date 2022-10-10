@@ -57,6 +57,10 @@ export const Product = styled('a', {
       borderRadius: 6,
       border: 'none',
       cursor: 'pointer',
+
+      '&:hover': {
+        backgroundColor: '$green300',
+      },
     },
 
     strong: {

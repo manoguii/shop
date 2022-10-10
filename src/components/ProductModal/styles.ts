@@ -29,6 +29,7 @@ export const ProductModalContainer = styled('div', {
     span: {
       color: '$gray100',
       fontSize: '$md',
+      fontWeight: '700',
     },
 
     button: {
@@ -38,6 +39,10 @@ export const ProductModalContainer = styled('div', {
       display: 'flex',
       fontSize: '1rem',
       cursor: 'pointer',
+
+      '&:hover': {
+        color: '$green500',
+      },
     },
   },
 })

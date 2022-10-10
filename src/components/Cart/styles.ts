@@ -86,4 +86,8 @@ export const ButtonPayament = styled('button', {
   marginTop: '50px',
   fontSize: '$md',
   fontWeight: '700',
+
+  '&:hover': {
+    backgroundColor: '$green300',
+  },
 })
