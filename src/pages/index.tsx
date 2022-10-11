@@ -8,6 +8,9 @@ import Stripe from 'stripe'
 import Link from 'next/link'
 import Head from 'next/head'
 import { Handbag } from 'phosphor-react'
+import Header from '../components/Header'
+import { ShopContext } from '../context/ShopContex'
+import { useContext } from 'react'
 
 interface HomeProps {
   products: {
@@ -25,11 +28,21 @@ export default function Home({ products }: HomeProps) {
       spacing: 48,
     },
   })
+  const { setProductsShop } = useContext(ShopContext)
+
+  function addProductCart(id: string) {
+    const productClicked = products.find((produto) => {
+      return produto.id === id
+    })
+    setProductsShop((state) => [...state, productClicked])
+  }
   return (
     <>
       <Head>
         <title>Home | Shop</title>
       </Head>
+
+      <Header />
 
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map((product) => {
@@ -48,7 +61,7 @@ export default function Home({ products }: HomeProps) {
                     <span>{product.price}</span>
                   </div>
                   <Link href={'/'}>
-                    <button>
+                    <button onClick={() => addProductCart(product.id)}>
                       <Handbag size={32} color="#FFFF" weight="bold" />
                     </button>
                   </Link>

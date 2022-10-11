@@ -1,16 +1,15 @@
 import Image from 'next/future/image'
 import { ProductModalContainer } from './styles'
-import camisa1 from '../../assets/camisetas/1.png'
 
-export default function ProductModal() {
+export default function ProductModal({ product }) {
   return (
     <ProductModalContainer>
       <div>
-        <Image src={camisa1} alt="" />
+        <Image src={product.imageUrl} width={100} height={90} alt="" />
       </div>
       <aside>
-        <h1>Camiseta Beyond the Limits</h1>
-        <span>R$ 79,90</span>
+        <h1>{product.name}</h1>
+        <span>{product.price}</span>
         <button>remover</button>
       </aside>
     </ProductModalContainer>
