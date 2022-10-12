@@ -35,20 +35,15 @@ export default function Home({ products }: HomeProps) {
       return produto.id === id
     })
 
-    const temNoCarrinho = productsShop.some((product) => {
-      return product.id === productClicked.id
+    const temNoCarrinho = productsShop.some((item) => {
+      return item.id === productClicked.id
     })
 
-    const newArray = productsShop.filter((product) => {
-      if (temNoCarrinho) {
-        return alert('Ja tem')
-      } else {
-        return productClicked
-      }
-    })
-
-    setProductsShop((state) => [...state, newArray])
+    if (temNoCarrinho) {
+      return alert('O produto ja esta no carrinho')
+    } else setProductsShop((state) => [...state, productClicked])
   }
+
   return (
     <>
       <Head>
@@ -103,6 +98,7 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL',
       }).format(price.unit_amount / 100),
+      priceNumber: price.unit_amount / 100,
     }
   })
 

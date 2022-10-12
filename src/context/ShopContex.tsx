@@ -11,6 +11,7 @@ interface ProductsType {
   name: string
   imageUrl: string
   price: string
+  priceNumber?: number
 }
 
 interface ContextType {
@@ -21,6 +22,8 @@ interface ShopContextType {
   productsShop: ProductsType[]
   setProductsShop: Dispatch<SetStateAction<ProductsType[]>>
   removeItemToCart: (id: string) => void
+  formatSum: string
+  quantityToCart: number
 }
 
 export const ShopContext = createContext({} as ShopContextType)
@@ -38,9 +41,28 @@ export function Shop({ children }: ContextType) {
     setProductsShop(newArray)
   }
 
+  // eslint-disable-next-line array-callback-return
+  const sumCart = productsShop.reduce((previous, current) => {
+    const typePrice = current.priceNumber
+    return previous + typePrice
+  }, 0)
+
+  const formatSum = new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(sumCart)
+
+  const quantityToCart = productsShop.length
+
   return (
     <ShopContext.Provider
-      value={{ productsShop, setProductsShop, removeItemToCart }}
+      value={{
+        productsShop,
+        setProductsShop,
+        removeItemToCart,
+        formatSum,
+        quantityToCart,
+      }}
     >
       {children}
     </ShopContext.Provider>
