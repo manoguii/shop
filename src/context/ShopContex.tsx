@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {
   createContext,
   Dispatch,
@@ -24,12 +25,35 @@ interface ShopContextType {
   removeItemToCart: (id: string) => void
   formatSum: string
   quantityToCart: number
+  setProductStripe: Dispatch<SetStateAction<{}>>
+  isCreateCheckoutSession: boolean
+  handleBayProduct: () => Promise<void>
 }
 
 export const ShopContext = createContext({} as ShopContextType)
 
 export function Shop({ children }: ContextType) {
   const [productsShop, setProductsShop] = useState<ProductsType[]>([])
+  const [productStripe, setProductStripe] = useState()
+  const [isCreateCheckoutSession, setIsCreateCheckoutSession] = useState(false)
+  console.log(productStripe)
+
+  async function handleBayProduct() {
+    try {
+      setIsCreateCheckoutSession(true)
+      const response = await axios.post('/api/checkout', {
+        priceId: productStripe,
+      })
+      console.log(response)
+      const { checkoutUrl } = response.data
+
+      window.location.href = checkoutUrl
+    } catch (err) {
+      setIsCreateCheckoutSession(false)
+      console.log(err)
+      alert('Falha ao redirecionar ao checkout')
+    }
+  }
 
   function removeItemToCart(id: string) {
     const productClicked = productsShop.find((product) => {
@@ -62,6 +86,9 @@ export function Shop({ children }: ContextType) {
         removeItemToCart,
         formatSum,
         quantityToCart,
+        setProductStripe,
+        isCreateCheckoutSession,
+        handleBayProduct,
       }}
     >
       {children}

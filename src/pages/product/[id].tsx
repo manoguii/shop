@@ -7,12 +7,12 @@ import {
   ProductContainer,
   ProductDetail,
 } from '../../styles/pages/products'
-import axios from 'axios'
-import { useState } from 'react'
+// import { useContext } from 'react'
 import Head from 'next/head'
 import Header from '../../components/Header'
+// import { ShopContext } from '../../context/ShopContex'
 
-interface ProductsProps {
+export interface ProductsProps {
   product: {
     id: string
     name: string
@@ -24,25 +24,11 @@ interface ProductsProps {
 }
 
 export default function Product({ product }: ProductsProps) {
+  // const { setProductStripe } = useContext(ShopContext)
+  // setProductStripe(product)
+
   // const {isFalback} = useRouter()
-  const [isCreateCheckoutSession, setIsCreateCheckoutSession] = useState(false)
 
-  async function handleBayProduct() {
-    try {
-      setIsCreateCheckoutSession(true)
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      })
-      // console.log(response)
-      const { checkoutUrl } = response.data
-
-      window.location.href = checkoutUrl
-    } catch (err) {
-      setIsCreateCheckoutSession(false)
-
-      alert('Falha ao redirecionar ao checkout')
-    }
-  }
   return (
     <>
       <Head>
@@ -62,9 +48,7 @@ export default function Product({ product }: ProductsProps) {
 
           <p>{product.description}</p>
 
-          <button disabled={isCreateCheckoutSession} onClick={handleBayProduct}>
-            Colocar na sacola
-          </button>
+          <button>Colocar na sacola</button>
         </ProductDetail>
       </ProductContainer>
     </>

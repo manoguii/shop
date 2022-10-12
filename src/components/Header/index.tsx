@@ -9,7 +9,6 @@ export default function Header() {
   return (
     <HeaderContainer>
       <Image src={logo.src} width={130} height={52} alt="" />
-
       <Dialog.Root>
         <Dialog.Trigger>
           <Handbag size={24} weight="bold" color="#8D8D99" />

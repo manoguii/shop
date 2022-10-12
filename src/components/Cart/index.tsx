@@ -15,7 +15,13 @@ import {
 } from './styles'
 
 export default function Cart() {
-  const { productsShop, formatSum, quantityToCart } = useContext(ShopContext)
+  const {
+    productsShop,
+    formatSum,
+    quantityToCart,
+    isCreateCheckoutSession,
+    handleBayProduct,
+  } = useContext(ShopContext)
   return (
     <Dialog.Portal>
       <Overlay />
@@ -45,7 +51,12 @@ export default function Cart() {
                 <strong>{formatSum}</strong>
               </li>
             </ul>
-            <ButtonPayament>Finalizar compra</ButtonPayament>
+            <ButtonPayament
+              disabled={isCreateCheckoutSession}
+              onClick={handleBayProduct}
+            >
+              Finalizar compra
+            </ButtonPayament>
           </PayamentContainer>
         ) : null}
       </Content>
