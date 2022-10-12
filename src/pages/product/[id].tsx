@@ -10,6 +10,7 @@ import {
 import axios from 'axios'
 import { useState } from 'react'
 import Head from 'next/head'
+import Header from '../../components/Header'
 
 interface ProductsProps {
   product: {
@@ -23,6 +24,7 @@ interface ProductsProps {
 }
 
 export default function Product({ product }: ProductsProps) {
+  // const {isFalback} = useRouter()
   const [isCreateCheckoutSession, setIsCreateCheckoutSession] = useState(false)
 
   async function handleBayProduct() {
@@ -31,7 +33,7 @@ export default function Product({ product }: ProductsProps) {
       const response = await axios.post('/api/checkout', {
         priceId: product.defaultPriceId,
       })
-
+      // console.log(response)
       const { checkoutUrl } = response.data
 
       window.location.href = checkoutUrl
@@ -47,6 +49,8 @@ export default function Product({ product }: ProductsProps) {
         <title>{product.name} | Shop</title>
       </Head>
 
+      <Header />
+
       <ProductContainer>
         <ImageContainer>
           <Image src={product.imageUrl} width={520} height={480} alt="" />
@@ -59,7 +63,7 @@ export default function Product({ product }: ProductsProps) {
           <p>{product.description}</p>
 
           <button disabled={isCreateCheckoutSession} onClick={handleBayProduct}>
-            Comprar agora
+            Colocar na sacola
           </button>
         </ProductDetail>
       </ProductContainer>
