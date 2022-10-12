@@ -1,7 +1,11 @@
 import Image from 'next/future/image'
+import { useContext } from 'react'
+import { ShopContext } from '../../context/ShopContex'
 import { ProductModalContainer } from './styles'
 
 export default function ProductModal({ product }) {
+  const { removeItemToCart } = useContext(ShopContext)
+
   return (
     <ProductModalContainer>
       <div>
@@ -10,7 +14,7 @@ export default function ProductModal({ product }) {
       <aside>
         <h1>{product.name}</h1>
         <span>{product.price}</span>
-        <button>remover</button>
+        <button onClick={() => removeItemToCart(product.id)}>remover</button>
       </aside>
     </ProductModalContainer>
   )

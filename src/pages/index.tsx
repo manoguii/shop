@@ -8,9 +8,9 @@ import Stripe from 'stripe'
 import Link from 'next/link'
 import Head from 'next/head'
 import { Handbag } from 'phosphor-react'
-import Header from '../components/Header'
 import { ShopContext } from '../context/ShopContex'
 import { useContext } from 'react'
+import Header from '../components/Header'
 
 interface HomeProps {
   products: {
@@ -28,13 +28,26 @@ export default function Home({ products }: HomeProps) {
       spacing: 48,
     },
   })
-  const { setProductsShop } = useContext(ShopContext)
+  const { setProductsShop, productsShop } = useContext(ShopContext)
 
   function addProductCart(id: string) {
     const productClicked = products.find((produto) => {
       return produto.id === id
     })
-    setProductsShop((state) => [...state, productClicked])
+
+    const temNoCarrinho = productsShop.some((product) => {
+      return product.id === productClicked.id
+    })
+
+    const newArray = productsShop.filter((product) => {
+      if (temNoCarrinho) {
+        return alert('Ja tem')
+      } else {
+        return productClicked
+      }
+    })
+
+    setProductsShop((state) => [...state, newArray])
   }
   return (
     <>

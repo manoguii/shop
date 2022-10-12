@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import logo from '../../assets/shop.svg'
 import { HeaderContainer } from './styles'
 import Cart from '../Cart'
@@ -9,9 +8,7 @@ import { Handbag } from 'phosphor-react'
 export default function Header() {
   return (
     <HeaderContainer>
-      <Link href={'/'}>
-        <Image src={logo.src} width={130} height={52} alt="" />
-      </Link>
+      <Image src={logo.src} width={130} height={52} alt="" />
 
       <Dialog.Root>
         <Dialog.Trigger>

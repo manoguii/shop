@@ -1,5 +1,4 @@
 import { AppProps } from 'next/app'
-// import Header from '../components/Header'
 import { Shop } from '../context/ShopContex'
 import { globalStyles } from '../styles/global'
 import { Container } from '../styles/pages/app'
