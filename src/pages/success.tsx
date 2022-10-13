@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Stripe from 'stripe'
+import HeaderSuccess from '../components/HeaderSuccess'
 import ImageSuccess from '../components/ImageSuccess'
 import { stripe } from '../lib/stripe'
 import { SuccessContainer } from '../styles/pages/success'
@@ -31,6 +32,8 @@ export default function Success({
 
         <meta name="robots" content="noindex" />
       </Head>
+
+      <HeaderSuccess />
 
       <SuccessContainer>
         <div>
