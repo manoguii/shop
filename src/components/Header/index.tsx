@@ -4,14 +4,19 @@ import { HeaderContainer } from './styles'
 import Cart from '../Cart'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Handbag } from 'phosphor-react'
+import { useContext } from 'react'
+import { ShopContext } from '../../context/ShopContex'
 
 export default function Header() {
+  const { quantityToCart } = useContext(ShopContext)
+
   return (
     <HeaderContainer>
       <Image src={logo.src} width={130} height={52} alt="" />
       <Dialog.Root>
         <Dialog.Trigger>
           <Handbag size={24} weight="bold" color="#8D8D99" />
+          {quantityToCart > 0 ? <div>{quantityToCart}</div> : null}
         </Dialog.Trigger>
         <Cart />
       </Dialog.Root>

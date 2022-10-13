@@ -20,5 +20,24 @@ export const HeaderContainer = styled('header', {
     height: '48px',
     border: 'none',
     cursor: 'pointer',
+    position: 'relative',
+
+    div: {
+      width: '24px',
+      height: '24px',
+      background: '$green500',
+      color: 'white',
+      weight: 'bold',
+      borderRadius: '9999px',
+
+      border: '2px solid $gray900',
+
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'absolute',
+      top: '-8px',
+      right: '-8px',
+    },
   },
 })

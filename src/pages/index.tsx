@@ -26,7 +26,7 @@ export default function Home({ products }: HomeProps) {
 
   useEffect(() => {
     setProductsStripe(products)
-  }, [])
+  }, [products, setProductsStripe])
 
   const [sliderRef] = useKeenSlider({
     slides: {

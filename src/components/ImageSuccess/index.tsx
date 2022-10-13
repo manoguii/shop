@@ -1,10 +1,10 @@
 import Image from 'next/future/image'
 import { ImageContainer } from './styles'
 
-export default function ImageSuccess({ product }) {
+export default function ImageSuccess({ item }) {
   return (
     <ImageContainer>
-      <Image src={product.imageUrl} width={120} height={110} alt="" />
+      <Image src={item.images[0]} width={120} height={110} alt="" />
     </ImageContainer>
   )
 }

@@ -28,7 +28,7 @@ export const CartEmptyContainer = styled('div', {
     backgroundColor: '$gray800',
     cursor: 'pointer',
     border: '3px solid $green500',
-    width: '100%',
+    maxWidth: '100%',
     marginTop: '50px',
     fontSize: '$md',
     fontWeight: '700',

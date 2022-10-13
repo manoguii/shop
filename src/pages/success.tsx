@@ -10,11 +10,20 @@ interface SuccessProps {
   customerName: string
   product: {
     name: string
-    imageUrl: string
   }
+  productPurchase: [
+    {
+      id: string
+      images: string
+    },
+  ]
 }
 
-export default function Success({ customerName, product }: SuccessProps) {
+export default function Success({
+  customerName,
+  product,
+  productPurchase,
+}: SuccessProps) {
   return (
     <>
       <Head>
@@ -25,9 +34,9 @@ export default function Success({ customerName, product }: SuccessProps) {
 
       <SuccessContainer>
         <div>
-          <ImageSuccess product={product} />
-          <ImageSuccess product={product} />
-          <ImageSuccess product={product} />
+          {productPurchase.map((item) => {
+            return <ImageSuccess key={item.id} item={item} />
+          })}
         </div>
         <h1>Compra efetuada !</h1>
         <p>
@@ -61,15 +70,18 @@ export const getServerSideProps: GetServerSideProps = async ({
   })
 
   const customerName = session.customer_details.name
-  const product = session.line_items.data[0].price.product as Stripe.Product
+  const productName = session.line_items.data[0].price.product as Stripe.Product
+  const productPurchase = session.line_items.data.map((product) => {
+    return product.price.product
+  })
 
   return {
     props: {
       customerName,
       product: {
-        name: product.name,
-        imageUrl: product.images[0],
+        name: productName.name,
       },
+      productPurchase,
     },
   }
 }

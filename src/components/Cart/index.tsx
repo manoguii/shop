@@ -15,8 +15,12 @@ import ProductModal from '../ProductModal'
 import * as Dialog from '@radix-ui/react-dialog'
 
 export default function Cart() {
-  const { productsShop, isCreateCheckoutSession, handleBayProduct } =
-    useContext(ShopContext)
+  const {
+    productsShop,
+    isCreateCheckoutSession,
+    handleBayProduct,
+    quantityToCart,
+  } = useContext(ShopContext)
 
   const sumCart = productsShop.reduce((previous, current) => {
     const priceNumberFormat = current.priceNumber
@@ -27,8 +31,6 @@ export default function Cart() {
     style: 'currency',
     currency: 'BRL',
   }).format(sumCart)
-
-  const quantityToCart = productsShop.length
 
   return (
     <Dialog.Portal>

@@ -23,6 +23,10 @@ export const SuccessContainer = styled('main', {
     '&:nth-child(3)': {
       order: 2,
     },
+
+    '&:nth-child(4)': {
+      order: 3,
+    },
   },
 
   h1: {

@@ -26,6 +26,7 @@ interface ShopContextType {
   handleBayProduct: () => Promise<void>
   addProductCart: (id: string) => void
   setProductsStripe: Dispatch<SetStateAction<ProductsType[]>>
+  quantityToCart: number
 }
 
 export const ShopContext = createContext({} as ShopContextType)
@@ -75,6 +76,8 @@ export function Shop({ children }: ContextType) {
     setProductsShop(newArray)
   }
 
+  const quantityToCart = productsShop.length
+
   return (
     <ShopContext.Provider
       value={{
@@ -84,6 +87,7 @@ export function Shop({ children }: ContextType) {
         handleBayProduct,
         addProductCart,
         setProductsStripe,
+        quantityToCart,
       }}
     >
       {children}
