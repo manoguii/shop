@@ -1,9 +1,3 @@
-import * as Dialog from '@radix-ui/react-dialog'
-import { X } from 'phosphor-react'
-import { useContext } from 'react'
-import { ShopContext } from '../../context/ShopContex'
-import CartEmpty from '../CartEmpty'
-import ProductModal from '../ProductModal'
 import {
   ButtonPayament,
   Close,
@@ -13,15 +7,29 @@ import {
   ProductsContainer,
   Title,
 } from './styles'
+import { X } from 'phosphor-react'
+import { useContext } from 'react'
+import { ShopContext } from '../../context/ShopContex'
+import CartEmpty from '../CartEmpty'
+import ProductModal from '../ProductModal'
+import * as Dialog from '@radix-ui/react-dialog'
 
 export default function Cart() {
-  const {
-    productsShop,
-    formatSum,
-    quantityToCart,
-    isCreateCheckoutSession,
-    handleBayProduct,
-  } = useContext(ShopContext)
+  const { productsShop, isCreateCheckoutSession, handleBayProduct } =
+    useContext(ShopContext)
+
+  const sumCart = productsShop.reduce((previous, current) => {
+    const priceNumberFormat = current.priceNumber
+    return previous + priceNumberFormat
+  }, 0)
+
+  const formatSum = new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(sumCart)
+
+  const quantityToCart = productsShop.length
+
   return (
     <Dialog.Portal>
       <Overlay />

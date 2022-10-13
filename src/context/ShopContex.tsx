@@ -21,38 +21,48 @@ interface ContextType {
 
 interface ShopContextType {
   productsShop: ProductsType[]
-  setProductsShop: Dispatch<SetStateAction<ProductsType[]>>
   removeItemToCart: (id: string) => void
-  formatSum: string
-  quantityToCart: number
-  setProductStripe: Dispatch<SetStateAction<{}>>
   isCreateCheckoutSession: boolean
   handleBayProduct: () => Promise<void>
+  addProductCart: (id: string) => void
+  setProductsStripe: Dispatch<SetStateAction<ProductsType[]>>
 }
 
 export const ShopContext = createContext({} as ShopContextType)
 
 export function Shop({ children }: ContextType) {
+  const [productsStripe, setProductsStripe] = useState<ProductsType[]>([])
+
   const [productsShop, setProductsShop] = useState<ProductsType[]>([])
-  const [productStripe, setProductStripe] = useState()
   const [isCreateCheckoutSession, setIsCreateCheckoutSession] = useState(false)
-  console.log(productStripe)
 
   async function handleBayProduct() {
     try {
       setIsCreateCheckoutSession(true)
       const response = await axios.post('/api/checkout', {
-        priceId: productStripe,
+        productsCart: productsShop,
       })
-      console.log(response)
       const { checkoutUrl } = response.data
 
       window.location.href = checkoutUrl
     } catch (err) {
       setIsCreateCheckoutSession(false)
-      console.log(err)
       alert('Falha ao redirecionar ao checkout')
     }
+  }
+
+  function addProductCart(id: string) {
+    const productClicked = productsStripe.find((produto) => {
+      return produto.id === id
+    })
+
+    const haveInCart = productsShop.some((item) => {
+      return item.id === productClicked.id
+    })
+
+    if (haveInCart) {
+      return alert('O produto ja esta no carrinho')
+    } else setProductsShop((state) => [...state, productClicked])
   }
 
   function removeItemToCart(id: string) {
@@ -65,30 +75,15 @@ export function Shop({ children }: ContextType) {
     setProductsShop(newArray)
   }
 
-  // eslint-disable-next-line array-callback-return
-  const sumCart = productsShop.reduce((previous, current) => {
-    const typePrice = current.priceNumber
-    return previous + typePrice
-  }, 0)
-
-  const formatSum = new Intl.NumberFormat('pt-br', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(sumCart)
-
-  const quantityToCart = productsShop.length
-
   return (
     <ShopContext.Provider
       value={{
         productsShop,
-        setProductsShop,
         removeItemToCart,
-        formatSum,
-        quantityToCart,
-        setProductStripe,
         isCreateCheckoutSession,
         handleBayProduct,
+        addProductCart,
+        setProductsStripe,
       }}
     >
       {children}

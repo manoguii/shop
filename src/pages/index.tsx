@@ -1,16 +1,16 @@
-import Image from 'next/future/image'
 import { HomeContainer, Product } from '../styles/pages/home'
 import { useKeenSlider } from 'keen-slider/react'
-import 'keen-slider/keen-slider.min.css'
 import { stripe } from '../lib/stripe'
 import { GetStaticProps } from 'next'
-import Stripe from 'stripe'
-import Link from 'next/link'
-import Head from 'next/head'
 import { Handbag } from 'phosphor-react'
 import { ShopContext } from '../context/ShopContex'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import Header from '../components/Header'
+import Stripe from 'stripe'
+import Image from 'next/future/image'
+import Link from 'next/link'
+import Head from 'next/head'
+import 'keen-slider/keen-slider.min.css'
 
 interface HomeProps {
   products: {
@@ -22,27 +22,18 @@ interface HomeProps {
 }
 
 export default function Home({ products }: HomeProps) {
+  const { addProductCart, setProductsStripe } = useContext(ShopContext)
+
+  useEffect(() => {
+    setProductsStripe(products)
+  }, [])
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 2,
       spacing: 48,
     },
   })
-  const { setProductsShop, productsShop } = useContext(ShopContext)
-
-  function addProductCart(id: string) {
-    const productClicked = products.find((produto) => {
-      return produto.id === id
-    })
-
-    const temNoCarrinho = productsShop.some((item) => {
-      return item.id === productClicked.id
-    })
-
-    if (temNoCarrinho) {
-      return alert('O produto ja esta no carrinho')
-    } else setProductsShop((state) => [...state, productClicked])
-  }
 
   return (
     <>
@@ -99,6 +90,7 @@ export const getStaticProps: GetStaticProps = async () => {
         currency: 'BRL',
       }).format(price.unit_amount / 100),
       priceNumber: price.unit_amount / 100,
+      defaultPriceId: price.id,
     }
   })
 

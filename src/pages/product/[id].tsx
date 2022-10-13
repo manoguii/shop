@@ -1,16 +1,16 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
-import Image from 'next/future/image'
-import Stripe from 'stripe'
-import { stripe } from '../../lib/stripe'
 import {
   ImageContainer,
   ProductContainer,
   ProductDetail,
 } from '../../styles/pages/products'
-// import { useContext } from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { stripe } from '../../lib/stripe'
+import Image from 'next/future/image'
+import Stripe from 'stripe'
 import Head from 'next/head'
 import Header from '../../components/Header'
-// import { ShopContext } from '../../context/ShopContex'
+import { useContext } from 'react'
+import { ShopContext } from '../../context/ShopContex'
 
 export interface ProductsProps {
   product: {
@@ -24,10 +24,7 @@ export interface ProductsProps {
 }
 
 export default function Product({ product }: ProductsProps) {
-  // const { setProductStripe } = useContext(ShopContext)
-  // setProductStripe(product)
-
-  // const {isFalback} = useRouter()
+  const { addProductCart } = useContext(ShopContext)
 
   return (
     <>
@@ -48,7 +45,9 @@ export default function Product({ product }: ProductsProps) {
 
           <p>{product.description}</p>
 
-          <button>Colocar na sacola</button>
+          <button onClick={() => addProductCart(product.id)}>
+            Colocar na sacola
+          </button>
         </ProductDetail>
       </ProductContainer>
     </>
