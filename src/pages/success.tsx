@@ -44,7 +44,12 @@ export default function Success({
         <h1>Compra efetuada !</h1>
         <p>
           Uhuul <strong>{customerName}</strong>, sua{' '}
-          <strong>{product.name}</strong> já está a caminho da sua casa.{' '}
+          <strong>
+            {productPurchase.length > 1
+              ? `compra de ${productPurchase.length} camisetas`
+              : product.name}
+          </strong>{' '}
+          já está a caminho da sua casa.{' '}
         </p>
 
         <Link href={'/'}>Voltar ao catálogo</Link>
