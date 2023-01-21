@@ -1,7 +1,20 @@
+import { styled } from '@/styles'
+
+const Button = styled('button', {
+  backgroundColor: '$green500',
+  padding: 8,
+  borderRadius: 8,
+  border: 0,
+
+  '&:hover': {
+    backgroundColor: 'Aqua',
+  },
+})
+
 export default function Home() {
   return (
     <>
-      <h1>Hello Wolrd</h1>
+      <Button>Hello Wolrd</Button>
     </>
   )
 }
