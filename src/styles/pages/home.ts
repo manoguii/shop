@@ -8,7 +8,7 @@ export const HomeContainer = styled('main', {
   minHeight: 400,
 })
 
-export const Product = styled('a', {
+export const Product = styled('div', {
   background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
   borderRadius: 8,
   cursor: 'pointer',
@@ -40,28 +40,6 @@ export const Product = styled('a', {
     transform: 'translateY(110%)',
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
-
-    div: {
-      display: 'flex',
-      gap: 4,
-      flexDirection: 'column',
-    },
-
-    button: {
-      width: '56px',
-      height: '56px',
-      backgroundColor: '$green500',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 6,
-      border: 'none',
-      cursor: 'pointer',
-
-      '&:hover': {
-        backgroundColor: '$green300',
-      },
-    },
 
     strong: {
       fontSize: '$lg',

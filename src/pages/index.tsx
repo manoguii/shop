@@ -3,22 +3,22 @@ import Image from 'next/image'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import { stripe } from '@/lib/stripe'
-import { GetServerSideProps } from 'next'
 import Stripe from 'stripe'
 import Link from 'next/link'
+import { GetStaticProps } from 'next'
 
-interface IHomeProps {
+interface ProductProps {
   name: string
   id: string
   image_url: string
-  price: number
+  price: string
 }
 
-interface IServerSideProps {
-  products: IHomeProps[]
+interface ServerSideProps {
+  products: ProductProps[]
 }
 
-export default function Home({ products }: IServerSideProps) {
+export default function Home({ products }: ServerSideProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -30,13 +30,17 @@ export default function Home({ products }: IServerSideProps) {
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map((product) => {
         return (
-          <Link href={`/product/${product.id}`} key={product.id}>
+          <Link
+            href={`/product/${product.id}`}
+            key={product.id}
+            prefetch={false}
+          >
             <Product className="keen-slider__slide">
               <Image
                 src={product.image_url}
                 width={520}
                 height={480}
-                alt={''}
+                alt="Imagem do produto"
               />
 
               <footer>
@@ -51,7 +55,7 @@ export default function Home({ products }: IServerSideProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await stripe.products.list({
     expand: ['data.default_price'],
   })
@@ -74,5 +78,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       products,
     },
+    revalidate: 60 * 60 * 12, // 12 hours
   }
 }
