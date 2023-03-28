@@ -14,16 +14,25 @@
 
 ## Instalação
 
+- Primeiro você precisa criar uma conta nas plataformas na qual o projeto tem integração
+
+- [x] [Stripe](https://stripe.com/br)
+
+- Crie um arquivo ```.env.local``` na raiz do projeto e preencha as variáveis ambiente, o exemplo de como deve ficar esta em ```.env.example```
+
+- Clone o repositório
 ```bash
-# Clone o repositório
 $ git clone https://github.com/manoguii/shop.git
-# Entre no repositório
-$ cd shop
-# Criar as variáveis ambiente em
-$ .env.local
-# Instale as dependências
+```
+
+- Instale as dependências
+```bash
 $ npm install
-# Execute a aplicação
+```
+
+- Execute a aplicação
+```bash
+$ npm run build
 $ npm run start
 ```
 
@@ -34,11 +43,10 @@ O projeto shop é um marketplace de camisetas integrado com Stripe para efetuar 
 
 ## Tecnologias utilizadas 👩🏻‍💻
 
-<div style="display:flex!important;">
-<a href="https://reactjs.org/"><img align="center" alt="Hideki-React" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"></a>
-<a href="https://www.typescriptlang.org/"><img align="center" alt="Hideki-Ts" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-plain.svg"></a>
-<a href="https://nextjs.org/"><img align="center" alt="Hideki-HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg"></a>
-</div>
-  
+- [ReactJS](https://reactjs.org/)
+- [NextJS](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+---  
 
 <p align="center">Made with 💙 by Guilherme David</p>
