@@ -42,10 +42,13 @@ export default function Product({ product }: ProductsProps) {
       alert('Falha ao redirecionar ao checkout')
     }
   }
+
+  const title = `${product.name} | Shop`
+
   return (
     <>
       <Head>
-        <title>{product.name} | Shop</title>
+        <title>{title}</title>
       </Head>
 
       <ProductContainer>

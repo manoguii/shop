@@ -9,7 +9,7 @@
 </p>
 
 <div align="left">
-  <img src="assets/shop.png" alt="faladev" >
+  <img src="public/shop.png" alt="faladev" >
 </div>
 
 ## Instalação
